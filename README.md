@@ -1,6 +1,6 @@
 # Frontend Space
 
-* Среда разработки сложных веб-приложений на основе Frontend Heaven.
+* Среда разработки сложных веб-приложений на основе [Frontend Heaven](https://github.com/Romuelson/frontend-heaven)
 
 ## Установка
 
