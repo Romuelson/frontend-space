@@ -11,8 +11,8 @@
 		"lint:fix": "npm run lint:scripts:fix && npm run lint:styles:fix",
 		"lint:styles": "stylelint **/*.scss",
 		"lint:styles:fix": "stylelint **/*.scss --fix",
-		"lint:scripts": "eslint src --ext .tsx",
-		"lint:scripts:fix": "eslint src --ext .tsx --fix"
+		"lint:scripts": "eslint src",
+		"lint:scripts:fix": "eslint src --fix"
 	},
 	"repository": {
 		"type": "git",
