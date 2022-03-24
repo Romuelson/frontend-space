@@ -20,11 +20,11 @@ module.exports = {
 	plugins: [
 		new FriendlyErrorsWebpackPlugin(),
 		new webpack.DefinePlugin(envKeys),
+		new ForkTsCheckerWebpackPlugin(),
 		new ESLintPlugin({
 			extensions: ['js', 'jsx','ts', 'tsx']
 		}),
-		new StylelintPlugin(),
-		new ForkTsCheckerWebpackPlugin()
+		new StylelintPlugin()
 	],
 	output: {
 		path: path.resolve(__dirname, '../../dist'),
@@ -52,7 +52,11 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(css|s[ac]ss)$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', {
+				use: [MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader'
+					},
+					{
 					loader: 'postcss-loader',
 					options: {
 						postcssOptions: {
@@ -73,7 +77,7 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env', '@babel/preset-react'],
+						presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
 						cacheDirectory: true
 					}
 				}
@@ -84,6 +88,13 @@ module.exports = {
 				exclude: /node_modules/,
 				options: {
 					transpileOnly : true
+				}
+			},
+			{
+				test: /\.svg/,
+				use: {
+				  loader: "svg-url-loader",
+				  options: {}
 				}
 			}
 		]
