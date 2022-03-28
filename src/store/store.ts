@@ -1,16 +1,30 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import couterReducer from './counter/counter-slice';
+/* Core */
+import { configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({
-	couterReducer,
-});
+/* Services */
+import { createAxiosAPI } from '../services/api/axios/axios.api';
 
-export const setupStore = () => {
+/* Reducers */
+import { rootReducer } from './reducers/root/root.reducer';
+
+const api = createAxiosAPI();
+
+export const createStore = (initialState = {}) => {
 	return configureStore({
 		reducer: rootReducer,
+		preloadedState: initialState,
+		middleware: (getDefaultMiddleware) =>
+			getDefaultMiddleware({
+				thunk: {
+					extraArgument: api,
+				},
+			}),
 	});
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export const store = createStore();
+
+export type AppStore = ReturnType<typeof store.getState>;
+// export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = typeof store.dispatch;
+export type AppReducer = ReturnType<typeof rootReducer>;

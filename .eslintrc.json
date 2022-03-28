@@ -39,6 +39,12 @@
 			}
 		],
 		"react/react-in-jsx-scope": "off",
-		"import/prefer-default-export": "off"
+		"import/prefer-default-export": "off",
+		"no-console": "off",
+		"class-methods-use-this": [
+			"error",
+			{ "enforceForClassFields": false }
+		],
+		"@typescript-eslint/no-unused-vars" : "off"
 	}
 }
